@@ -22,22 +22,6 @@ bool checkApkPaths(JNIEnv* env, jobject context);
 jobject getApplication(JNIEnv* env);
 std::string getAppComponentFactory(JNIEnv* env, jobject context);
 
-/*
-##############################################################################
-###              🛡️ Parcelable.Creator Class Name Verification           ###
-##############################################################################
-
-🔍 **Purpose:**
-Ensures the integrity of Android `PackageInfo`'s `Parcelable.Creator` by validating its **class name**.
-
-🚨 **Security Check:**
-- Compares the class name against the **expected value**.
-- **Mismatch detected?** → **⚠️ Possible tampering!**
-
-✅ Returns `true` if a suspicious or unexpected class name is found.
-
-##############################################################################
-*/
 
 bool checkCreator(JNIEnv* env) {
     bool suspicious = false;
@@ -73,22 +57,6 @@ bool checkCreator(JNIEnv* env) {
     return suspicious;
 }
 
-/*
-##############################################################################
-###               🛡️ Parcelable.Creator Field Validation                ###
-##############################################################################
-
-🔍 **Purpose:**
-Ensures the integrity of the Android `PackageInfo`'s `CREATOR` class by verifying its **declared field count**.
-
-🚨 **Security Check:**
-- The `CREATOR` class should have **zero declared fields** under normal conditions.
-- **Unexpected fields detected?** → **⚠️ Potential tampering!**
-
-✅ Returns `true` if anomalies are found, flagging possible security risks.
-
-##############################################################################
-*/
 
 bool checkField(JNIEnv* env) {
     bool suspicious = false;
@@ -124,25 +92,6 @@ bool checkField(JNIEnv* env) {
     LOGE("\n");
     return suspicious;
 }
-/*
-##############################################################################
-###                   🔍 Parcelable.Creator Integrity Check               ###
-##############################################################################
-
-🔍 **Purpose:**
-`checkCreators` ensures the integrity of the Android `PackageInfo`'s `Parcelable.Creator` by performing **two critical security checks**.
-
-🛡️ **1. Creator Identity Validation**
-- Verifies that the `CREATOR` object is legitimately linked to the framework’s `PackageInfo` class.
-- Ensures its output starts with `"android.content.pm.PackageInfo$"` (expected for valid creators).
-- **🚨 Mismatch detected?** → Possible **tampering**!
-
-🛡️ **2. ClassLoader Integrity Check**
-- Compares the `CREATOR` class’s **ClassLoader** with the system ClassLoader.
-- **Identical ClassLoaders?** → **⚠️ Suspicious!** (Could indicate a maliciously replaced class).
-
-##############################################################################
-*/
 
 bool checkCreators(JNIEnv* env) {
     bool suspicious = false;
@@ -196,21 +145,6 @@ bool checkCreators(JNIEnv* env) {
     LOGE("\n");
     return suspicious;
 }
-/*
-##############################################################################
-###           🛡️ PackageManager Integrity Verification                  ###
-##############################################################################
-
-🔍 **Purpose:**
-Ensures that the PackageManager's underlying `IPackageManager` implementation is the legitimate **Proxy class**
-(`IPackageManager$Stub$Proxy`), preventing unauthorized tampering.
-
-🚨 **Security Importance:**
-- Detects **malicious replacements** via **reflection** or **hooking**.
-- Ensures system integrity by verifying that PackageManager behavior remains **unaltered**.
-
-##############################################################################
-*/
 
 bool checkPMProxy(JNIEnv* env, jobject context) {
     bool suspicious = false;
@@ -282,21 +216,7 @@ std::string getAppComponentFactory(JNIEnv* env, jobject context) {
 
     return "";
 }
-/*
-##############################################################################
-###                  🛡️ App Component Factory Validator                  ###
-##############################################################################
 
-🔍 **Purpose:**
-Ensures that `appComponentFactory` (introduced in Android Oreo) correctly matches the expected `CoreComponentFactory`,
-preventing potential **malicious component hijacking**.
-
-🚨 **Security Importance:**
-- Prevents unauthorized manipulation of **activity/service instantiation**.
-- Detects signs of **tampering** that could grant attackers control over app components.
-
-##############################################################################
-*/
 
 bool checkAppComponentFactory(JNIEnv* env) {
     bool suspicious = false;
@@ -345,38 +265,6 @@ std::string getApkPath(JNIEnv* env, jobject context) {
         return "";
     }
 }
-
-/*
-##############################################################################
-###                        🔍 APK Integrity Checker                        ###
-##############################################################################
-
-#### 1️⃣ **Path Collection**
-   - Retrieves APK-related paths from multiple sources:
-     - `getPackageResourcePath()`, `getPackageCodePath()` (via context).
-     - ApplicationInfo fields (`sourceDir`, `publicSourceDir`).
-     - PackageManager's `getApplicationInfo()` for verification.
-     - A custom `getApkPath()` function (if available).
-
-#### 2️⃣ **Consistency Checks**
-   - Ensures all collected paths refer to the same APK file.
-   - Example: `/data/app/com.example.app-1/base.apk`.
-   - Flags discrepancies as **suspicious**.
-
-#### 3️⃣ **Path Structure Validations**
-   - **✅ Prefix Check**: All paths must start with `"/data/app/"` (expected Android app storage location).
-   - **✅ Suffix Check**: Must end with `"/base.apk"` (standard APK format).
-
-#### 4️⃣ **File Permissions & Ownership**
-   - Uses `stat()` and `chmod()` to enforce security:
-     - **🔒 Permissions**: Must be `0644` (read/write for owner, read-only for others).
-     - **👤 Ownership**: UID `1000` (assigned to system apps on Android).
-     - **⚠️ Tamper Resistance**:
-       - Checks if permissions can be altered (`chmod(path, 0777)`).
-       - If modifiable, flags as **suspicious** and resets to `0644`.
-
-##############################################################################
-*/
 
 
 bool checkApkPaths(JNIEnv* env, jobject context) {
