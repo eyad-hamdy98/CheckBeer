@@ -135,6 +135,17 @@ public class SecurityCheck {
 
 ```
 
+## Demo
+
+![Okay](https://github.com/user-attachments/assets/5b8e5bda-0577-4b10-9506-e8965a86a6c5)
+
+![Wrong1](https://github.com/user-attachments/assets/0eba4f9d-93f0-4bbe-837f-25cf34838706)
+
+![Wrong2](https://github.com/user-attachments/assets/a18579d2-eec8-4f75-951c-f3e5530d01cc)
+
+![Wrong3](https://github.com/user-attachments/assets/43a57f33-d71d-4d3f-a2bc-32d316c3b3ab)
+
+
 ## License
 
 This project is licensed under the MIT License.
