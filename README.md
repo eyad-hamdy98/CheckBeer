@@ -1,7 +1,4 @@
 # CheckBeer
-Easy-to-use Android library for tampering detection, with a sample app included
-
-# CheckBeer
 
 CheckBeer is an anti-tampering Android library designed to protect the integrity and security of your app by detecting common signature bypass and tampering techniques.
 
