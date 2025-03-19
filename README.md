@@ -111,7 +111,7 @@ Java_com_example_app_SecurityCheck_verifyIntegrity(
         jobject context) {
     
     bool suspicious = checkSignatureBypass(env, context);
-    return !suspicious;
+    return suspicious;
 }
 ```
 
@@ -119,21 +119,20 @@ Corresponding Java code:
 
 ```java
 public class SecurityCheck {
-    public static native boolean verifyIntegrity(Context context);
     
-    public boolean validateApp(Context context) {
+    public static native boolean verifyIntegrity(Context context);
+
+    public void validateApp(Context context) {
         try {
-            if (!verifyIntegrity(context)) {
-                // Handle security violation
-                return false;
+            if (verifyIntegrity(context)) {
+                throw new RuntimeException("Security violation detected!");
             }
-            return true;
-        } catch (Exception e) {
-            // Handle errors
-            return false;
+        } catch (UnsatisfiedLinkError | Exception e) {
+            // Handle errors if needed
         }
     }
 }
+
 ```
 
 ## License
